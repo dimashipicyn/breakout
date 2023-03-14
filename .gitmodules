@@ -1,0 +1,3 @@
+[submodule "2dCpp"]
+	path = 2dCpp
+	url = git@github.com:dimashipicyn/2dCpp.git
