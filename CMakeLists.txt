@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 set(VCPKG_ROOT_DIR "$ENV{VCPKG_ROOT}" CACHE PATH "VCPKG_ROOT_DIR")
 
@@ -26,17 +27,24 @@ endif()
 
 project(breakout)
 
-add_compile_options(-Wall -Wextra -pedantic)
+add_compile_options(-Wall -Wextra -pedantic -fsanitize=address)
+add_link_options(-fsanitize=address)
 
 set(SOURCE_FILES
 	src/main.cpp
 	src/simple_scene.cpp
 	src/ball.cpp
+	src/Rocket.cpp
+	src/Block.cpp
+	src/Level.cpp
 )
 
 set(HEADER_FILES 
 	src/simple_scene.hpp
 	src/ball.hpp
+	src/Rocket.hpp
+	src/Block.hpp
+	src/Level.hpp
 )
 
 set (CMAKE_CXX_STANDARD 17)

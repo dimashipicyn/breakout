@@ -11,7 +11,6 @@
 #include <memory>
 #include <vector>
 
-#include "scene.h"
 #include "Sprite.h"
 #include "AnimationSprite.hpp"
 #include "Node.hpp"
@@ -21,27 +20,20 @@
 class Ball;
 class Rocket;
 class Block;
+class Level;
 
-class Simple_scene : public Scene
+class Simple_scene : public NodeBase
 {
 public:
     virtual ~Simple_scene() noexcept;
-    virtual void start(Game& game) override;
+    virtual void init(Game& game) override;
     virtual void update(Game& game) override;
-	virtual void render(Game& game) override;
     
 private:
-	void create_walls(int width, int height);
-	void load_level(Game& game, int width, int height, int num);
-	void create_rocket(Game& game, int width, int height);
-	void create_ball(Game& game, int width, int height);
-	glm::vec2 get_ball_start_pos();
-	void next_level(Game& game);
 
 	Ptr<Ball> ball_;
 	Ptr<Rocket> rocket_;
-	std::vector<Ptr<Block>> blocks;
-	int current_level = 1;
+	Ptr<Level> level_;
 };
 
 #endif /* simple_scene_hpp */

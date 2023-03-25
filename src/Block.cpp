@@ -16,14 +16,16 @@ Block::~Block()
 
 }
 
-void Block::init(Game& game)
+void Block::init(Game&)
 {
-	block_.load(game.get_graphics(), "assets/block.png");
 }
 
-void Block::render(Game& game)
+void Block::update(Game&)
 {
-	glm::vec2 pos = get_position();
-	block_.set_position(pos.x, pos.y);
-	block_.draw(game.get_graphics());
+
+}
+
+void Block::set_type(int type)
+{
+	solid_ = (type == 1);
 }

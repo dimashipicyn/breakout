@@ -8,20 +8,18 @@
 #ifndef Rocket_hpp
 #define Rocket_hpp
 
-#include "Node.hpp"
-#include "Sprite.h"
+#include "SpriteNode.hpp"
 
-class Rocket : public NodeBase
+class Rocket : public SpriteNode
 {
 public:
 	virtual ~Rocket();
 
 	virtual void init(Game& game) override;
 	virtual void update(Game& game) override;
-	virtual void render(Game& game) override;
 
-	Sprite sprite_;
-	float velocity_ = 100.0f;
+private:
+	float velocity_ = 300.0f;
 };
 
 #endif /* Rocket_hpp */

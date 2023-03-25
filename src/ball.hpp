@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Node.hpp"
-#include "Sprite.h"
+#include "SpriteNode.hpp"
 
-class Ball : public NodeBase
+class Ball : public SpriteNode
 {
 public:
 	virtual ~Ball();
@@ -11,8 +10,6 @@ public:
     virtual void init(Game& game) override;
 	virtual void update(Game& game) override;
 
-	virtual void render(Game& game) override;
-
-	Sprite ball_;
-	float velocity_ = 100.0f;
+private:
+	float velocity_ = 200.0f;
 };

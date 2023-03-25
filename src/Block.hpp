@@ -8,18 +8,19 @@
 #ifndef Block_hpp
 #define Block_hpp
 
-#include "Node.hpp"
-#include "Sprite.h"
+#include "SpriteNode.hpp"
 
-class Block : public NodeBase
+class Block : public SpriteNode
 {
 public:
 	virtual ~Block();
 
 	virtual void init(Game& game) override;
-	virtual void render(Game& game) override;
+	virtual void update(Game& game) override;
 
-	Sprite block_;
+	void set_type(int type);
+
+private:
 	bool solid_ = false;
 };
 
