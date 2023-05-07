@@ -37,6 +37,7 @@ set(SOURCE_FILES
 	src/Rocket.cpp
 	src/Block.cpp
 	src/Level.cpp
+	src/menu_scene.cpp
 )
 
 set(HEADER_FILES 
@@ -45,6 +46,7 @@ set(HEADER_FILES
 	src/Rocket.hpp
 	src/Block.hpp
 	src/Level.hpp
+	src/menu_scene.h
 )
 
 set (CMAKE_CXX_STANDARD 17)

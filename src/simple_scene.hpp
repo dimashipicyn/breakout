@@ -11,6 +11,7 @@
 #include <memory>
 #include <vector>
 
+#include "Font.h"
 #include "Sprite.h"
 #include "AnimationSprite.hpp"
 #include "Node.hpp"
@@ -21,6 +22,7 @@ class Ball;
 class Rocket;
 class Block;
 class Level;
+class BitmapFont;
 
 class Simple_scene : public NodeBase
 {
@@ -34,6 +36,7 @@ private:
 	Ptr<Ball> ball_;
 	Ptr<Rocket> rocket_;
 	Ptr<Level> level_;
+    Ptr<Font> font;
 };
 
 #endif /* simple_scene_hpp */

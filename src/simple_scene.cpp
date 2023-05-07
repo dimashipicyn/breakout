@@ -6,16 +6,20 @@
 //
 
 #include "simple_scene.hpp"
+#include "Common.hpp"
 #include "ball.hpp"
 #include "Rocket.hpp"
 #include "Block.hpp"
 #include "Level.hpp"
+#include "Widgets.h"
 
 #include "game.h"
 #include "graphics.h"
 #include "Sprite_atlas.hpp"
+#include "input.h"
 #include "log.h"
 #include "Node.hpp"
+#include "Font.h"
 
 #include <glm/vec2.hpp>
 #include <cmath>
@@ -73,6 +77,9 @@ void Simple_scene::init(Game &game) {
 	game.get_audio().play_music("breakout");
 }
 
-void Simple_scene::update(Game &e) {
-	
+void Simple_scene::update(Game &game) {
+	Graphics& gr = game.get_graphics();
+	glm::vec2 pos = game.get_input().get_mouse_position();
+
+	//gr.draw_str(*font, 0, 0, "Hello World", color_green);
 }

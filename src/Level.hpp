@@ -9,6 +9,7 @@
 #define Level_hpp
 
 #include "Node.hpp"
+#include <functional>
 
 class Level : public NodeBase
 {
@@ -22,6 +23,10 @@ private:
 	void load_level(Game& game);
 	void clear_level();
 
+	using on_change_level_callback = std::function<void(int level_num)>;
+	void on_change_level(on_change_level_callback cb);
+
+	on_change_level_callback callback;
 	int current_level = 0;
 };
 

@@ -13,15 +13,22 @@
 class Block : public SpriteNode
 {
 public:
+	enum Type {
+		SIMPLE,
+		SOLID
+	};
+
+public:
 	virtual ~Block();
 
 	virtual void init(Game& game) override;
 	virtual void update(Game& game) override;
 
-	void set_type(int type);
+	void set_type(Type type);
+	Type get_type();
 
 private:
-	bool solid_ = false;
+	Type type_ = SIMPLE;
 };
 
 

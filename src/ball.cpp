@@ -27,4 +27,6 @@ void Ball::update(Game &game) {
 	if (pos.x < 0.0f || pos.x > width) {
 		set_direction(glm::vec2(-dir.x, dir.y));
 	}
+
+	velocity_ += 0.001;
 }

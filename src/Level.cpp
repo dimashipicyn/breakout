@@ -24,9 +24,27 @@ void Level::init(Game& game)
 	load_level(game);
 }
 
-void Level::update(Game&)
+void Level::update(Game& game)
 {
+	bool level_end = true;
 
+	for (int i = 0; i < num_childs(); i++) {
+		Block* block = (Block*)get_children(i).get();
+		if (block->get_type() != Block::SOLID)
+		{
+			level_end = false;
+			break;
+		}
+	}
+
+
+	if (level_end)
+	{
+		++current_level;
+		load_level(game);
+		if (callback)
+			callback(current_level);
+	}
 }
 
 void Level::load_level(Game& game)
@@ -37,6 +55,7 @@ void Level::load_level(Game& game)
 	std::ifstream file(filename);
 	if (!file.is_open()) {
 		LOG_ERROR(std::string("Could not open file") + filename);
+		game.stop();
 		return;
 	}
 
@@ -67,7 +86,7 @@ void Level::load_level(Game& game)
 
 			Ptr<Block> block = CreatePtr<Block>();
 
-			if (type == 1) {
+			if ((Block::Type)type == Block::SOLID) {
 				block->load(gr, "assets/block_solid.png");
 			}
 			else {
@@ -76,15 +95,7 @@ void Level::load_level(Game& game)
 
 			block->set_position(glm::vec2(b_size_w * j, b_size_h * i));
 			block->set_size(b_size_w, b_size_h);
-			block->set_type(type);
-
-			Body* body = ph.create(AABB(b_size_w * j, b_size_h * i, b_size_w, b_size_h));
-			body->set_direction(glm::vec2(0, -1.0f));
-			body->on_collision([block](auto&, auto&){
-				block->delete_node();
-			});
-
-			block->set_body(body);
+			block->set_type((Block::Type)type);
 
 			block->set_color(rand_color);
 
@@ -100,4 +111,9 @@ void Level::clear_level()
 		NodePtr child = get_children(i);
 		child->delete_node();
 	}
+}
+
+void Level::on_change_level(on_change_level_callback cb)
+{
+	callback = cb;
 }
