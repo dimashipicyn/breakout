@@ -19,7 +19,7 @@ public:
     {
         Graphics& gr = game.get_graphics();
         font = CreatePtr<Font>();
-        font->load(gr, "assets/sans.ttf", 30);
+        font->load(gr, "assets/EightBits.ttf", 35);
 
         grid = CreatePtr<WidgetGrid>("grid", 200, 200, 2, 4, 200, 30);
 
@@ -73,7 +73,7 @@ void Menu::init(Game& game)
 {
     Graphics& gr = game.get_graphics();
     font = CreatePtr<Font>();
-    font->load(gr, "assets/sans.ttf", 30);
+    font->load(gr, "assets/EightBits.ttf", 35);
 
     grid = CreatePtr<WidgetGrid>("grid", 200, 200, 1, 2, 200, 30);
 
