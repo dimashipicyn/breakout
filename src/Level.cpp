@@ -50,11 +50,11 @@ void Level::update(Game& game)
 void Level::load_level(Game& game)
 {
 	char filename[256] = {0};
-	sprintf(filename, "levels/%d.txt", current_level);
+	sprintf(filename, "../levels/%d.txt", current_level);
 
 	std::ifstream file(filename);
 	if (!file.is_open()) {
-		LOG_ERROR(std::string("Could not open file") + filename);
+		LOG_ERROR(std::string("Could not open file: ") + filename);
 		game.stop();
 		return;
 	}
