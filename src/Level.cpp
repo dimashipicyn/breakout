@@ -87,10 +87,10 @@ void Level::load_level(Game& game)
 			Ptr<Block> block = CreatePtr<Block>();
 
 			if ((Block::Type)type == Block::SOLID) {
-				block->load(gr, "assets/block_solid.png");
+				block->load(gr, "../assets/block_solid.png");
 			}
 			else {
-				block->load(gr, "assets/block.png");
+				block->load(gr, "../assets/block.png");
 			}
 
 			block->set_position(glm::vec2(b_size_w * j, b_size_h * i));

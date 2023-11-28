@@ -38,7 +38,7 @@ void Simple_scene::init(Game &game) {
 	int height = gr.get_height();
 
 	Ptr<SpriteNode> background = CreatePtr<SpriteNode>();
-	background->load(gr, "assets/background.png");
+	background->load(gr, "../assets/background.png");
 	background->set_size(width, height);
 	add_node(background);
 
@@ -46,7 +46,7 @@ void Simple_scene::init(Game &game) {
 	add_node(level_);
 
 	ball_ = CreatePtr<Ball>();
-	ball_->load(game.get_graphics(), "assets/ball.png");
+	ball_->load(game.get_graphics(), "../assets/ball.png");
 	ball_->set_size(10, 10);
 
 	Body* ball_body = physics.create(AABB(400, 550, 10, 10), true);
@@ -61,7 +61,7 @@ void Simple_scene::init(Game &game) {
 	int y = height - r_size_h;
 
 	rocket_ = CreatePtr<Rocket>();
-	rocket_->load(gr, "assets/paddle.png");
+	rocket_->load(gr, "../assets/paddle.png");
 	rocket_->set_size(r_size_w, r_size_h);
 
 	Body* rocket_body = physics.create(AABB(x, y, r_size_w, r_size_h));
