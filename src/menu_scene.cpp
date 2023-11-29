@@ -19,7 +19,7 @@ public:
     {
         Graphics& gr = game.get_graphics();
         font = CreatePtr<Font>();
-        font->load(gr, "assets/EightBits.ttf", 35);
+        font->load(gr, "../assets/EightBits.ttf", 35);
 
         grid = CreatePtr<WidgetGrid>("grid", 200, 200, 2, 4, 200, 30);
 
@@ -73,9 +73,9 @@ void Menu::init(Game& game)
 {
     Graphics& gr = game.get_graphics();
     font = CreatePtr<Font>();
-    font->load(gr, "assets/EightBits.ttf", 35);
+    font->load(gr, "../assets/EightBits.ttf", 35);
 
-    grid = CreatePtr<WidgetGrid>("grid", 200, 200, 1, 2, 200, 30);
+    grid = CreatePtr<WidgetGrid>("grid", 0, 400, 1, 2, 200, 30);
 
     auto start = CreatePtr<WidgetButton>(font, 0, 0, "start", "Start");
     start->on_click([&game]() { game.push(CreatePtr<Simple_scene>()); });
@@ -94,4 +94,5 @@ void Menu::update(Game& game)
 void Menu::render(Game& game)
 {
     grid->render(game);
+    game.get_graphics().debugRenderFont(*font);
 }

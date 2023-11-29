@@ -1,10 +1,7 @@
 cmake_minimum_required(VERSION 3.20.0)
 project(breakout)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
-set (CMAKE_CXX_STANDARD 17)
-
-add_compile_options(-Wall -Wextra)
+add_compile_options(-Wall)
 
 set(SOURCE_FILES
 	src/main.cpp

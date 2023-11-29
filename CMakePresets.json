@@ -18,6 +18,11 @@
         "CMAKE_CXX_EXTENSIONS": "OFF",
         "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin",
         "CMAKE_LIBRARY_OUTPUT_DIRECTORY": "${sourceDir}/bin"
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "intelliSenseMode": "windows-clang-x64"
+        }
       }
     },
 

@@ -78,8 +78,8 @@ void Simple_scene::init(Game &game) {
 }
 
 void Simple_scene::update(Game &game) {
-	Graphics& gr = game.get_graphics();
-	glm::vec2 pos = game.get_input().get_mouse_position();
+	//Graphics& gr = game.get_graphics();
+	//glm::vec2 pos = game.get_input().get_mouse_position();
 
 	//gr.draw_str(*font, 0, 0, "Hello World", color_green);
 }

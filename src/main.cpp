@@ -14,7 +14,7 @@ int main(int ac, char** argv, char** env) {
 	config.name = "Breakout";
 
 	Game game(config);
-	game.push(CreatePtr<Simple_scene>());
+	game.push(CreatePtr<Menu>());
     game.run();
 
     return 0;
