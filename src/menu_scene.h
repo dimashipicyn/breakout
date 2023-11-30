@@ -12,7 +12,11 @@ public:
     void init(Game& game);
     void update(Game& game);
     void render(Game& game);
+
+    void click() { }
+    void clickArg(const Widget&) { }
+
 private:
     FontPtr font;
-    WidgetGridPtr grid;
+    GridPtr grid;
 };

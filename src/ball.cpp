@@ -10,7 +10,7 @@ void Ball::init(Game &) {
 }
 
 void Ball::update(Game &game) {
-	translate(velocity_ * game.get_tick());
+	translate(velocity_ * game.get_elapsed());
 
 	Graphics& gr = game.get_graphics();
 
@@ -28,5 +28,5 @@ void Ball::update(Game &game) {
 		set_direction(glm::vec2(-dir.x, dir.y));
 	}
 
-	velocity_ += 0.001;
+	//velocity_ += 0.001;
 }

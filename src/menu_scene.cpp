@@ -11,7 +11,7 @@
 class Options : public NodeBase {
 private:
     FontPtr font;
-    WidgetGridPtr grid;
+    GridPtr grid;
 
 public:
     ~Options() = default;
@@ -21,34 +21,35 @@ public:
         font = CreatePtr<Font>();
         font->load(gr, "../assets/EightBits.ttf", 35);
 
-        grid = CreatePtr<WidgetGrid>("grid", 200, 200, 2, 4, 200, 30);
+        grid = CreatePtr<Grid>("grid", 200, 200, 2, 4, 200, 30);
 
-        WidgetLabelPtr w = CreatePtr<WidgetLabel>(font, 0, 0, "test", "Difficulty");
+        LabelPtr w = CreatePtr<Label>(font, 0, 0, "test", "Difficulty");
         grid->set(0, 0, w);
 
-        WidgetSelectPtr ws = CreatePtr<WidgetSelect>(font, 0, 0, "test");
+        SelectPtr ws = CreatePtr<Select>(font, 0, 0, "test");
         ws->add_option("Easy");
         ws->add_option("Medium");
         ws->add_option("Hard");
         grid->set(0, 1, ws);
 
-        WidgetLabelPtr ww = CreatePtr<WidgetLabel>(font, 0, 0, "test", "Language");
+        LabelPtr ww = CreatePtr<Label>(font, 0, 0, "test", "Language");
         grid->set(1, 0, ww);
 
-        WidgetSelectPtr wss = CreatePtr<WidgetSelect>(font, 0, 0, "test");
+        SelectPtr wss = CreatePtr<Select>(font, 0, 0, "test");
         wss->add_option("Russian");
         wss->add_option("English");
         wss->add_option("Germany");
         grid->set(1, 1, wss);
 
-        WidgetLabelPtr wsliderlabel = CreatePtr<WidgetLabel>(font, 0, 0, "test", "Volume");
+        LabelPtr wsliderlabel = CreatePtr<Label>(font, 0, 0, "test", "Volume");
         grid->set(2, 0, wsliderlabel);
 
-        WidgetSliderPtr wslider = CreatePtr<WidgetSlider>(font, 0, 0, 100, 5, "test");
+        SliderPtr wslider = CreatePtr<Slider>(font, 0, 0, 100, 5, "test");
         grid->set(2, 1, wslider);
 
-        WidgetButtonPtr back = CreatePtr<WidgetButton>(font, 0, 0, "back", "Back");
-        back->on_click([&game](){
+        ButtonPtr back = CreatePtr<Button>(font, 0, 0, "back", "Back");
+        back->on(WidgetSignal::LeftClick, [&game]()
+            {
             game.pop();
         });
         grid->set(3, 0, back);
@@ -75,14 +76,20 @@ void Menu::init(Game& game)
     font = CreatePtr<Font>();
     font->load(gr, "../assets/EightBits.ttf", 35);
 
-    grid = CreatePtr<WidgetGrid>("grid", 0, 400, 1, 2, 200, 30);
+    grid = CreatePtr<Grid>("grid", 50, 50, 1, 2, 200, 30);
 
-    auto start = CreatePtr<WidgetButton>(font, 0, 0, "start", "Start");
-    start->on_click([&game]() { game.push(CreatePtr<Simple_scene>()); });
+    auto start = CreatePtr<Button>(font, 0, 0, "start", "Start");
+    start->on(WidgetSignal::LeftClick, [&game]()
+        { game.push(CreatePtr<Simple_scene>()); });
+    start->on(WidgetSignal::LeftClick, [&game](const Widget&)
+        { });
+    start->on(WidgetSignal::LeftClick, this, &Menu::click);
+    start->on(WidgetSignal::LeftClick, this, &Menu::clickArg);
     grid->set(0, 0, start);
 
-    auto options = CreatePtr<WidgetButton>(font, 0, 0, "options", "Options");
-    options->on_click([&game]() { game.push(CreatePtr<Options>()); });
+    auto options = CreatePtr<Button>(font, 0, 0, "options", "Options");
+    options->on(WidgetSignal::LeftClick, [&game]()
+        { game.push(CreatePtr<Options>()); });
     grid->set(1, 0, options);
 }
 
@@ -94,5 +101,5 @@ void Menu::update(Game& game)
 void Menu::render(Game& game)
 {
     grid->render(game);
-    game.get_graphics().debugRenderFont(*font);
+    //game.get_graphics().debugRenderFont(*font);
 }
