@@ -18,5 +18,5 @@ public:
 
 private:
     FontPtr font;
-    GridPtr grid;
+    //GridPtr grid;
 };

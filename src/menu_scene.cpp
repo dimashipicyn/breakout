@@ -7,6 +7,7 @@
 #include "game.h"
 #include "graphics.h"
 #include "simple_scene.hpp"
+#include "Resources.h"
 
 class Options : public NodeBase {
 private:
@@ -17,10 +18,7 @@ public:
     ~Options() = default;
     void init(Game& game)
     {
-        Graphics& gr = game.get_graphics();
-        font = CreatePtr<Font>();
-        font->load(gr, "../assets/EightBits.ttf", 35);
-
+        /*auto font = game.resources().get<Font>("EightBits.ttf", 35);
         grid = CreatePtr<Grid>("grid", 200, 200, 2, 4, 200, 30);
 
         LabelPtr w = CreatePtr<Label>(font, 0, 0, "test", "Difficulty");
@@ -52,12 +50,12 @@ public:
             {
             game.pop();
         });
-        grid->set(3, 0, back);
+        grid->set(3, 0, back);*/
     }
 
-    void update(Game& game) { grid->update(game); }
+    void update(Game& game) { /*grid->update(game);*/ }
 
-    void render(Game& game) { grid->render(game); }
+    void render(Game& game) { /*grid->render(game);*/ }
 };
 
 Menu::Menu()
@@ -70,11 +68,14 @@ Menu::~Menu()
 
 }
 
+LabelPtr label;
+ButtonPtr button;
+SliderPtr slider;
+SelectPtr select;
+
 void Menu::init(Game& game)
 {
-    Graphics& gr = game.get_graphics();
-    font = CreatePtr<Font>();
-    font->load(gr, "../assets/EightBits.ttf", 35);
+    /*auto font = game.resources().get<Font>("EightBits.ttf", 35);
 
     grid = CreatePtr<Grid>("grid", 50, 50, 1, 2, 200, 30);
 
@@ -90,16 +91,33 @@ void Menu::init(Game& game)
     auto options = CreatePtr<Button>(font, 0, 0, "options", "Options");
     options->on(WidgetSignal::LeftClick, [&game]()
         { game.push(CreatePtr<Options>()); });
-    grid->set(1, 0, options);
+    grid->set(1, 0, options);*/
+    label = CreatePtr<Label>("Start label");
+    button = CreatePtr<Button>("Simple button");
+    button->setPos(Point(0, 20));
+    slider = CreatePtr<Slider>(0.1f, 0.0f);
+    slider->setPos(Point(0, 40));
+    slider->setSize(Size(100, 0));
+    select = CreatePtr<Select>();
+    select->setPos(Point(0, 60));
+    select->add_option("First option");
+    select->add_option("Second option");
+    select->add_option("Another option");
 }
 
 void Menu::update(Game& game)
 {
-    grid->update(game);
+    label->update(game);
+    button->update(game);
+    slider->update(game);
+    select->update(game);
 }
 
 void Menu::render(Game& game)
 {
-    grid->render(game);
+    label->render(game);
+    button->render(game);
+    slider->render(game);
+    select->render(game);
     //game.get_graphics().debugRenderFont(*font);
 }
