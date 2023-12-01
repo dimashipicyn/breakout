@@ -17,6 +17,5 @@ public:
     void clickArg(const Widget&) { }
 
 private:
-    FontPtr font;
-    //GridPtr grid;
+    WidgetPtr widget;
 };
