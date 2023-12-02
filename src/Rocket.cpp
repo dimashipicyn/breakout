@@ -8,6 +8,7 @@
 #include "Rocket.hpp"
 
 #include "game.h"
+#include "input.h"
 
 Rocket::~Rocket()
 {

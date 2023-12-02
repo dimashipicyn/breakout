@@ -8,6 +8,7 @@
 #include "Block.hpp"
 
 #include "game.h"
+#include "Audio.hpp"
 
 #include "glm/ext/vector_float2.hpp"
 #include "glm/vec2.hpp"

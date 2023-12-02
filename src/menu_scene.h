@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Node.hpp"
-#include "Widgets.h"
-#include "Font.h"
+
+class Widget;
 
 class Menu : public NodeBase
 {
@@ -17,5 +17,5 @@ public:
     void clickArg(const Widget&) { }
 
 private:
-    WidgetPtr widget;
+    Ptr<Widget> widget;
 };
