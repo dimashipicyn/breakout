@@ -30,7 +30,7 @@ void Block::init(Game& game)
 	body->on_collision([this, &game](auto &, auto &) {
 		if (type_ != SOLID)
 			delete_node();
-		game.get_audio().play_chunk("solid");
+		game.get_audio().play_music("../audio/solid.wav");
 	});
 
 	set_body(body);

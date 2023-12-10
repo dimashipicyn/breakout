@@ -9,82 +9,86 @@
 #include "simple_scene.hpp"
 #include "Resources.h"
 
-class Options : public NodeBase {
-private:
-    WidgetPtr widget;
-
+class Options : public Widget {
 public:
-    ~Options() = default;
-    void init(Game& game)
-    {
-        widget = CreatePtr<Widget>();
+    Button* back = nullptr;
+    Select* difficulty = nullptr;
+    Select* language = nullptr;
+    Slider* volume = nullptr;
 
-        auto hlayout = new HLayout(widget.get());
+    Options()
+    {
+        auto* hlayout = new HLayout(this);
         hlayout->setMargin(10);
-        auto vlayout = new VLayout;
+          
+        auto* vlayout = new VLayout;
         hlayout->add(vlayout);
         vlayout->setMargin(10);
         vlayout->add(new Label("Difficulty"));
         vlayout->add(new Label("Language"));
         vlayout->add(new Label("Volume"));
         
-        auto back = new Button("Back");
+        back  = new Button("Back");
         vlayout->add(back);
-        back->on(WidgetSignal::LeftClick, [&game]()
-            { game.pop(); });
 
         vlayout = new VLayout;
-        hlayout->add(vlayout);
         vlayout->setMargin(10);
-        auto select = new Select;
-        vlayout->add(select);
-        select->add_option("Easy");
-        select->add_option("Medium");
-        select->add_option("Hard");
+        hlayout->add(vlayout);
+        
+        difficulty = new Select;
+        vlayout->add(difficulty);
+        difficulty->add_option("Easy");
+        difficulty->add_option("Medium");
+        difficulty->add_option("Hard");
 
-        select = new Select;
-        vlayout->add(select);
-        select->add_option("Russian");
-        select->add_option("English");
-        select->add_option("Germany");
+        language = new Select;
+        vlayout->add(language);
+        language->add_option("Russian");
+        language->add_option("English");
+        language->add_option("Germany");
 
-        vlayout->add(new Slider(0.1f, 0.0f));
+        volume = new Slider(0.1f, 0.0f);
+        volume->resize(Size(100, 20));
+        vlayout->add(volume);
     }
-
-    void update(Game& game) { widget->update(game); }
-
-    void render(Game& game) { widget->render(game); }
 };
-
-Menu::Menu()
-{
-
-}
-
-Menu::~Menu()
-{
-
-}
 
 void Menu::init(Game& game)
 {
-    widget = CreatePtr<Widget>();
-    //widget->setPos(Point(100, 100));
+    mainMenu_ = CreatePtr<Widget>();
+    mainMenu_->move(Point(50, 50));
 
-    auto vlayout = new VLayout(widget.get());
+    options_ = CreatePtr<Options>();
+    options_->move(Point(50, 50));
+    options_->back->on(WidgetSignal::LeftClick, [this]()
+        { active_ = mainMenu_.get(); });
+
+    active_ = mainMenu_.get();
+
+    auto* vlayout = new VLayout(mainMenu_.get());
     vlayout->setMargin(10);
     
-    auto start = new Button("Start");
-    vlayout->add(start);
-    start->on(WidgetSignal::LeftClick, [&game]()
-        { game.push(CreatePtr<Simple_scene>()); });
+    if (!resume_)
+    {
+        auto* start = new Button("Start");
+        vlayout->add(start);
+        start->on(WidgetSignal::LeftClick, [&game]()
+            { game.push(CreatePtr<Simple_scene>()); });
+    }
+    else
+    {
+        auto* resume = new Button("Resume");
+        vlayout->add(resume);
+        resume->on(WidgetSignal::LeftClick, [&game]()
+            { game.pop(); });
+    }
 
-    auto options = new Button("Options");
+    auto* options = new Button("Options");
     vlayout->add(options);
-    options->on(WidgetSignal::LeftClick, [&game]()
-        { game.push(CreatePtr<Options>()); });
+    options->on(WidgetSignal::LeftClick, [this]()
+        { active_ = options_.get(); });
 
-    auto exit = new Button("Exit");
+    auto* exit = new Button("Exit");
     vlayout->add(exit);
     exit->on(WidgetSignal::LeftClick, [&game]()
         { game.stop(); });
@@ -92,10 +96,10 @@ void Menu::init(Game& game)
 
 void Menu::update(Game& game)
 {
-    widget->update(game);
+    active_->update(game);
 }
 
 void Menu::render(Game& game)
 {
-    widget->render(game);
+    active_->render(game);
 }
