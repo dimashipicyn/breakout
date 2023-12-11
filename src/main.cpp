@@ -1,7 +1,6 @@
-#include "Common.hpp"
 #include "game.h"
-#include "menu_scene.h"
-#include "simple_scene.hpp"
+
+#include "GameLogic.h"
 
 int main(int ac, char** argv, char** env) {
 	(void)ac;
@@ -14,7 +13,7 @@ int main(int ac, char** argv, char** env) {
 	config.name = "Breakout";
 
 	Game game(config);
-	game.push(CreatePtr<Menu>());
+	game.push(CreatePtr<GameLogic>());
     game.run();
 
     return 0;

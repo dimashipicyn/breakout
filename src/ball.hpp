@@ -9,7 +9,5 @@ public:
 
     virtual void init(Game& game) override;
 	virtual void update(Game& game) override;
-
-private:
-	float velocity_ = 200.0f;
+	float velocity_ = 0.0f;
 };
